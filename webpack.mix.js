@@ -1,15 +1,16 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
+const config = require('./webpack.config')
+require('laravel-mix-vue-css-modules')
+require('laravel-mix-eslint')
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
+mix
+  .js('resources/js/app.js', 'public/js')
+  .webpackConfig(config)
+  .options({ terser: { extractComments: false } })
+  .vueCssModules({
+    oneOf: true,
+    preProcessor: { scss: true }
+  })
+  .eslint({ fix: true })
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.inProduction() ? mix.version() : mix.sourceMaps(true, 'source-map')
