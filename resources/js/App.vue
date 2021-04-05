@@ -42,7 +42,3 @@ export default {
     />
   </transition>
 </template>
-
-<style lang="scss">
-@import '@design/app.scss';
-</style>
