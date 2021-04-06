@@ -29,7 +29,7 @@ export default {
           :to="{ name: 'dashboard' }"
         >
           <img
-            src="~@assets/img/logo.svg"
+            src="https://preview.tabler.io/static/logo.svg"
             class="header-brand-img"
             alt="logo"
           >

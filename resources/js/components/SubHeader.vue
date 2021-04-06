@@ -13,13 +13,14 @@ export default {
       <div class="col-lg order-lg-first">
         <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
           <li class="nav-item">
-            <a
-              href="./index.html"
+            <RouterLink
+              :to="{ name: 'dashboard' }"
               class="nav-link"
+              active-class="active"
             >
               <i class="fe fe-home" />
-              Home
-            </a>
+              Dashboard
+            </RouterLink>
           </li>
         </ul>
       </div>

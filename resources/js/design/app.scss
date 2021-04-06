@@ -1947,14 +1947,15 @@ pre code {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
+  min-height: 40px;
   font-size: 0.9375rem;
   line-height: 1.6;
-  color: #495057;
+  color: #606266;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 40, 100, 0.12);
-  border-radius: 3px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -1968,7 +1969,8 @@ pre code {
   border: 0;
 }
 
-.form-control:focus {
+.form-control:focus,
+.el-input__inner:focus {
   color: #495057;
   background-color: #fff;
   border-color: #1991eb;
@@ -2313,6 +2315,10 @@ select.form-control-lg:not([size]):not([multiple]),
   color: #cd201f;
 }
 
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
 .invalid-tooltip {
   position: absolute;
   top: 100%;
@@ -2331,14 +2337,17 @@ select.form-control-lg:not([size]):not([multiple]),
 .was-validated .form-control:invalid,
 .form-control.is-invalid,
 .was-validated .custom-select:invalid,
-.custom-select.is-invalid {
-  border-color: #cd201f;
+.custom-select.is-invalid,
+.is-invalid .el-input__inner,
+.is-invalid .el-input__inner:hover {
+  border-color: #cd201f !important;
 }
 
 .was-validated .form-control:invalid:focus,
 .form-control.is-invalid:focus,
 .was-validated .custom-select:invalid:focus,
-.custom-select.is-invalid:focus {
+.custom-select.is-invalid:focus,
+.is-invalid .el-input__inner:focus {
   border-color: #cd201f;
   box-shadow: 0 0 0 2px rgba(205, 32, 31, 0.25);
 }

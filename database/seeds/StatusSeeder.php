@@ -13,8 +13,8 @@ class StatusSeeder extends Seeder
     public function run()
     {
         $statuses = [
-            'name' => 'incomplete',
-            'name' => 'completed',
+            ['name' => 'incomplete'],
+            ['name' => 'completed'],
         ];
 
         Status::insert($statuses);
