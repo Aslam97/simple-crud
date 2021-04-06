@@ -11,6 +11,7 @@ export default {
       status_id: '',
       due_date: ''
     },
+    editableId: '',
     tryToSubmit: false,
     datePickerOptions: {
       disabledDate(date) {
@@ -24,7 +25,14 @@ export default {
   computed: {
     ...mapGetters('status', ['statuses']),
     ...mapGetters('assignees', ['assignees']),
-    ...mapGetters('user', ['tasks'])
+    ...mapGetters('user', ['tasks']),
+    ...mapGetters('task', ['task'])
+  },
+
+  watch: {
+    task(value) {
+      Object.keys(value).forEach(i => (this.model[i] = value[i]))
+    }
   },
 
   mounted() {
@@ -40,7 +48,15 @@ export default {
       this.tryToSubmit = true
 
       try {
-        const { message } = await this.$store.dispatch('task/store', this.model)
+        let vuex = 'task/store'
+        let data = this.model
+
+        if (this.editableId) {
+          vuex = 'task/update'
+          data = { id: this.editableId, payload: this.model }
+        }
+
+        const { message } = await this.$store.dispatch(vuex, data)
 
         this.model = {
           title: '',
@@ -60,6 +76,22 @@ export default {
       } catch (e) {
         this.tryToSubmit = false
       }
+    },
+
+    edit(id) {
+      this.editableId = id
+      this.$store.dispatch('task/edit', id)
+    },
+
+    cancelEdit() {
+      this.editableId = ''
+      this.model = {
+        title: '',
+        description: '',
+        status_id: '',
+        due_date: ''
+      }
+      this.$refs.formTask.reset()
     }
   }
 }
@@ -188,7 +220,24 @@ export default {
               </ValidationProvider>
 
               <div class="form-footer">
-                <button class="btn btn-primary btn-block">
+                <div
+                  v-if="editableId"
+                  class="d-flex"
+                >
+                  <button
+                    class="btn btn-danger w-50"
+                    @click="cancelEdit"
+                  >
+                    Cancel
+                  </button>
+                  <button class="btn btn-primary w-50">
+                    Update
+                  </button>
+                </div>
+                <button
+                  v-else
+                  class="btn btn-primary btn-block"
+                >
                   Create
                 </button>
               </div>
@@ -244,16 +293,11 @@ export default {
                     /></a>
                     <div class="dropdown-menu dropdown-menu-right">
                       <a
-                        href="javascript:void(0)"
+                        role="button"
                         class="dropdown-item"
+                        @click="edit(task.id)"
                       >
                         <i class="dropdown-icon fe fe-trash" /> Edit
-                      </a>
-                      <a
-                        href="javascript:void(0)"
-                        class="dropdown-item"
-                      >
-                        <i class="dropdown-icon fe fe-link" /> Delete
                       </a>
                     </div>
                   </div>
