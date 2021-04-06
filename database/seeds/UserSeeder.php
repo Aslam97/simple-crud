@@ -11,12 +11,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = factory(App\User::class)->create([
-            'email' => 'admin@admin.com',
-            'avatar' => 'https://www.gravatar.com/avatar/' . md5(strtolower('admin@admin.com')) . '.jpg?s=200&d=mm',
-        ]);
+        $admin = factory(App\User::class)->create(['email' => 'admin@app.com']);
+        $admin->assignRole('admin');
 
-        $user->assignRole('admin');
+        $supervisor = factory(App\User::class)->create(['email' => 'supervisor@app.com']);
+        $supervisor->assignRole('supervisor');
+
+        $employee = factory(App\User::class)->create(['email' => 'employee@app.com']);
+        $employee->assignRole('employee');
 
         factory(App\User::class, 5)
             ->create()

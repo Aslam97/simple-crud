@@ -63482,7 +63482,9 @@ var modules = requireContext.keys().map(function (file) {
 var map = {
 	"./assignees.js": "./resources/js/store/modules/assignees.js",
 	"./auth.js": "./resources/js/store/modules/auth.js",
-	"./status.js": "./resources/js/store/modules/status.js"
+	"./status.js": "./resources/js/store/modules/status.js",
+	"./task.js": "./resources/js/store/modules/task.js",
+	"./user.js": "./resources/js/store/modules/user.js"
 };
 
 
@@ -63772,6 +63774,89 @@ var actions = {
         var data = _ref2.data;
         var statuses = data.data;
         commit('setStatuses', statuses);
+        resolve(data);
+      })["catch"](function (_ref3) {
+        var response = _ref3.response;
+        return reject(response);
+      });
+    });
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/task.js":
+/*!********************************************!*\
+  !*** ./resources/js/store/modules/task.js ***!
+  \********************************************/
+/*! exports provided: state, getters, mutations, actions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getters", function() { return getters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mutations", function() { return mutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return actions; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = {};
+var getters = {};
+var mutations = {};
+var actions = {
+  store: function store(_, payload) {
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/tasks', payload).then(function (_ref) {
+        var data = _ref.data;
+        return resolve(data);
+      })["catch"](function (_ref2) {
+        var response = _ref2.response;
+        return reject(response);
+      });
+    });
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/user.js":
+/*!********************************************!*\
+  !*** ./resources/js/store/modules/user.js ***!
+  \********************************************/
+/*! exports provided: state, getters, mutations, actions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getters", function() { return getters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mutations", function() { return mutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return actions; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = {
+  tasks: []
+};
+var getters = {
+  tasks: function tasks(state) {
+    return state.tasks;
+  }
+};
+var mutations = {
+  setTasks: function setTasks(state, payload) {
+    state.tasks = payload;
+  }
+};
+var actions = {
+  tasks: function tasks(_ref) {
+    var commit = _ref.commit;
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/user/tasks').then(function (_ref2) {
+        var data = _ref2.data;
+        var tasks = data.data;
+        commit('setTasks', tasks);
         resolve(data);
       })["catch"](function (_ref3) {
         var response = _ref3.response;
