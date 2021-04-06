@@ -17913,5 +17913,29 @@ svg {
   content: "\EA06";
 }
 
+.pill {
+  border-radius: 10px;
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  padding: 0 8px;
+  text-align: left;
+  white-space: nowrap;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.xxx .el-select-dropdown__item {
+  display: flex;
+  align-items: center;
+}
+
 
 /*# sourceMappingURL=app.css.map*/

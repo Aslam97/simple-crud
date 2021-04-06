@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->dateTime('due_date');
+            $table->foreignId('status_id')->constrained();
             $table->unsignedBigInteger('assignee_id')
                 ->foreign('assignee_id')
                 ->references('id')

@@ -8,7 +8,7 @@ export default {
     model: {
       title: '',
       description: '',
-      statuses: [],
+      status_id: '',
       due_date: ''
     },
     tryToSubmit: false,
@@ -45,11 +45,12 @@ export default {
         this.model = {
           title: '',
           description: '',
-          statuses: [],
+          status_id: '',
           due_date: ''
         }
         this.tryToSubmit = false
         this.$refs.formTask.reset()
+        this.$store.dispatch('user/tasks')
 
         this.$notify({
           title: 'Success',
@@ -109,17 +110,27 @@ export default {
                   Status <span class="form-required">*</span>
                 </label>
                 <ElSelect
-                  v-model="model.statuses"
+                  v-model="model.status_id"
                   :class="['w-100', { 'is-invalid': errors[0] }]"
                   placeholder=""
-                  multiple
+                  popper-class="xxx"
                 >
                   <ElOption
                     v-for="status in statuses"
                     :key="status.id"
                     :label="status.name"
                     :value="status.id"
-                  />
+                  >
+                    <span
+                      class="pill"
+                      :style="{
+                        color: status.color,
+                        backgroundColor: status.bg
+                      }"
+                    >
+                      {{ status.name }}
+                    </span>
+                  </ElOption>
                 </ElSelect>
                 <span class="invalid-feedback">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -209,9 +220,19 @@ export default {
                   :key="task.id"
                 >
                   <td>{{ task.title }}</td>
-                  <td>{{ task.description }}</td>
-                  <td>{{ task.status }}</td>
-                  <td>{{ task.assignee_id }}</td>
+                  <td>{{ task.description ? task.description : '-' }}</td>
+                  <td>
+                    <span
+                      class="pill"
+                      :style="{
+                        color: task.status.color,
+                        backgroundColor: task.status.bg
+                      }"
+                    >
+                      {{ task.status.name }}
+                    </span>
+                  </td>
+                  <td>{{ task.assignee.name }}</td>
                   <td>{{ task.due_date }}</td>
                   <td class="text-center">
                     <div class="item-action dropdown">

@@ -28,8 +28,7 @@ class StoreTaskRequest extends FormRequest
             'description' => 'nullable|string',
             'assignee_id' => 'required',
             'due_date' => 'required|date',
-            'statuses' => 'required|array|min:1',
-            'statuses.*' => 'required|distinct',
+            'status_id' => 'required|numeric',
         ];
     }
 }

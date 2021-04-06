@@ -17853,3 +17853,25 @@ svg {
 .fe-zoom-out:before {
   content: '\ea06';
 }
+
+.pill {
+  border-radius: 10px;
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  padding: 0 8px;
+  text-align: left;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.xxx .el-select-dropdown__item {
+  display: flex;
+  align-items: center;
+}

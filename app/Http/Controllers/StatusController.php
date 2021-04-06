@@ -10,7 +10,6 @@ class StatusController extends Controller
     public function index()
     {
         $statuses = Status::all();
-
         return StatusResource::collection($statuses);
     }
 }

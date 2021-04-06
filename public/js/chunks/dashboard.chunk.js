@@ -32,7 +32,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       model: {
         title: '',
         description: '',
-        statuses: [],
+        status_id: '',
         due_date: ''
       },
       tryToSubmit: false,
@@ -71,12 +71,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _this.model = {
                   title: '',
                   description: '',
-                  statuses: [],
+                  status_id: '',
                   due_date: ''
                 };
                 _this.tryToSubmit = false;
 
                 _this.$refs.formTask.reset();
+
+                _this.$store.dispatch('user/tasks');
 
                 _this.$notify({
                   title: 'Success',
@@ -84,20 +86,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   message: message
                 });
 
-                _context.next = 15;
+                _context.next = 16;
                 break;
 
-              case 12:
-                _context.prev = 12;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](1);
                 _this.tryToSubmit = false;
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 12]]);
+        }, _callee, null, [[1, 13]]);
       }))();
     }
   }
@@ -221,30 +223,52 @@ var render = function() {
                                             ],
                                             attrs: {
                                               placeholder: "",
-                                              multiple: ""
+                                              "popper-class": "xxx"
                                             },
                                             model: {
-                                              value: _vm.model.statuses,
+                                              value: _vm.model.status_id,
                                               callback: function($$v) {
                                                 _vm.$set(
                                                   _vm.model,
-                                                  "statuses",
+                                                  "status_id",
                                                   $$v
                                                 )
                                               },
-                                              expression: "model.statuses"
+                                              expression: "model.status_id"
                                             }
                                           },
                                           _vm._l(_vm.statuses, function(
                                             status
                                           ) {
-                                            return _c("ElOption", {
-                                              key: status.id,
-                                              attrs: {
-                                                label: status.name,
-                                                value: status.id
-                                              }
-                                            })
+                                            return _c(
+                                              "ElOption",
+                                              {
+                                                key: status.id,
+                                                attrs: {
+                                                  label: status.name,
+                                                  value: status.id
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass: "pill",
+                                                    style: {
+                                                      color: status.color,
+                                                      backgroundColor: status.bg
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                    " +
+                                                        _vm._s(status.name) +
+                                                        "\n                  "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
                                           }),
                                           1
                                         ),
@@ -490,11 +514,33 @@ var render = function() {
                     return _c("tr", { key: task.id }, [
                       _c("td", [_vm._v(_vm._s(task.title))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(task.description))]),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(task.description ? task.description : "-")
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(task.status))]),
+                      _c("td", [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "pill",
+                            style: {
+                              color: task.status.color,
+                              backgroundColor: task.status.bg
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(task.status.name) +
+                                "\n                  "
+                            )
+                          ]
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(task.assignee_id))]),
+                      _c("td", [_vm._v(_vm._s(task.assignee.name))]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(task.due_date))]),
                       _vm._v(" "),

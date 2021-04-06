@@ -16,7 +16,9 @@ class UserController extends Controller
 
     public function tasks()
     {
-        $tasks = Task::where('assignee_id', auth()->id())->get();
+        $tasks = Task::where('assignee_id', auth()->id())
+            ->with(['status', 'assignee'])
+            ->get();
 
         return TaskResource::collection($tasks);
     }
