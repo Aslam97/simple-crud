@@ -198,65 +198,69 @@ export default {
       </div>
       <div class="col-lg-8">
         <div class="card">
-          <div class="table-responsive">
-            <table
-              class="table table-hover table-outline table-vcenter text-nowrap card-table"
-            >
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Status</th>
-                  <th>Assigned</th>
-                  <th>Due Date</th>
-                  <th class="text-center">
-                    <i class="icon-settings" />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="task in tasks"
-                  :key="task.id"
-                >
-                  <td>{{ task.title }}</td>
-                  <td>{{ task.description ? task.description : '-' }}</td>
-                  <td>
-                    <span
-                      class="pill"
-                      :style="{
-                        color: task.status.color,
-                        backgroundColor: task.status.bg
-                      }"
-                    >
-                      {{ task.status.name }}
-                    </span>
-                  </td>
-                  <td>{{ task.assignee.name }}</td>
-                  <td>{{ task.due_date }}</td>
-                  <td class="text-center">
-                    <div class="item-action dropdown">
+          <table
+            class="table table-hover table-outline table-vcenter text-nowrap card-table"
+          >
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Assigned</th>
+                <th>Due Date</th>
+                <th class="text-center">
+                  <i class="icon-settings" />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="task in tasks"
+                :key="task.id"
+              >
+                <td>{{ task.title }}</td>
+                <td>{{ task.description ? task.description : '-' }}</td>
+                <td>
+                  <span
+                    class="pill"
+                    :style="{
+                      color: task.status.color,
+                      backgroundColor: task.status.bg
+                    }"
+                  >
+                    {{ task.status.name }}
+                  </span>
+                </td>
+                <td>{{ task.assignee.name }}</td>
+                <td>{{ task.due_date }}</td>
+                <td class="text-center">
+                  <div class="item-action dropdown">
+                    <a
+                      href="javascript:void(0)"
+                      data-toggle="dropdown"
+                      class="icon"
+                    ><i
+                      class="fe fe-more-vertical"
+                    /></a>
+                    <div class="dropdown-menu dropdown-menu-right">
                       <a
                         href="javascript:void(0)"
-                        data-toggle="dropdown"
-                        class="icon"
-                      ><i
-                        class="fe fe-more-vertical"
-                      /></a>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a
-                          href="javascript:void(0)"
-                          class="dropdown-item"
-                        >
-                          <i class="dropdown-icon fe fe-link" /> Separated link
-                        </a>
-                      </div>
+                        class="dropdown-item"
+                      >
+                        <i class="dropdown-icon fe fe-trash" /> Edit
+                      </a>
+                      <a
+                        href="javascript:void(0)"
+                        class="dropdown-item"
+                      >
+                        <i class="dropdown-icon fe fe-link" /> Delete
+                      </a>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

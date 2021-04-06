@@ -498,60 +498,56 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-8" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c(
-              "table",
-              {
-                staticClass:
-                  "table table-hover table-outline table-vcenter text-nowrap card-table"
-              },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.tasks, function(task) {
-                    return _c("tr", { key: task.id }, [
-                      _c("td", [_vm._v(_vm._s(task.title))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(task.description ? task.description : "-")
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "pill",
-                            style: {
-                              color: task.status.color,
-                              backgroundColor: task.status.bg
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(task.status.name) +
-                                "\n                  "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(task.assignee.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(task.due_date))]),
-                      _vm._v(" "),
-                      _vm._m(1, true)
-                    ])
-                  }),
-                  0
-                )
-              ]
-            )
-          ])
+          _c(
+            "table",
+            {
+              staticClass:
+                "table table-hover table-outline table-vcenter text-nowrap card-table"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.tasks, function(task) {
+                  return _c("tr", { key: task.id }, [
+                    _c("td", [_vm._v(_vm._s(task.title))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(task.description ? task.description : "-"))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "pill",
+                          style: {
+                            color: task.status.color,
+                            backgroundColor: task.status.bg
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                  " +
+                              _vm._s(task.status.name) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(task.assignee.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(task.due_date))]),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ])
+                }),
+                0
+              )
+            ]
+          )
         ])
       ])
     ])
@@ -603,8 +599,20 @@ var staticRenderFns = [
               attrs: { href: "javascript:void(0)" }
             },
             [
+              _c("i", { staticClass: "dropdown-icon fe fe-trash" }),
+              _vm._v(" Edit\n                    ")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-item",
+              attrs: { href: "javascript:void(0)" }
+            },
+            [
               _c("i", { staticClass: "dropdown-icon fe fe-link" }),
-              _vm._v(" Separated link\n                      ")
+              _vm._v(" Delete\n                    ")
             ]
           )
         ])

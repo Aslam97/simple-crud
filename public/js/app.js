@@ -63801,9 +63801,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-var state = {};
-var getters = {};
-var mutations = {};
+var state = {
+  task: ''
+};
+var getters = {
+  task: function task(state) {
+    return state.task;
+  }
+};
+var mutations = {
+  setTask: function setTask(state, payload) {
+    state.task = payload;
+  }
+};
 var actions = {
   store: function store(_, payload) {
     return new Promise(function (resolve, reject) {
@@ -63812,6 +63822,44 @@ var actions = {
         return resolve(data);
       })["catch"](function (_ref2) {
         var response = _ref2.response;
+        return reject(response);
+      });
+    });
+  },
+  edit: function edit(_ref3, id) {
+    var commit = _ref3.commit;
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/tasks/".concat(id)).then(function (_ref4) {
+        var data = _ref4.data;
+        var task = data.data;
+        commit('setTask', task);
+        resolve(data);
+      })["catch"](function (_ref5) {
+        var response = _ref5.response;
+        return reject(response);
+      });
+    });
+  },
+  update: function update(_, data) {
+    var id = data.id,
+        payload = data.payload;
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/tasks/".concat(id), payload).then(function (_ref6) {
+        var data = _ref6.data;
+        return resolve(data);
+      })["catch"](function (_ref7) {
+        var response = _ref7.response;
+        return reject(response);
+      });
+    });
+  },
+  destroy: function destroy(_, id) {
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/tasks/".concat(id)).then(function (_ref8) {
+        var data = _ref8.data;
+        return resolve(data);
+      })["catch"](function (_ref9) {
+        var response = _ref9.response;
         return reject(response);
       });
     });
