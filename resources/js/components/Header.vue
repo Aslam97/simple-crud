@@ -1,16 +1,32 @@
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Header'
+  name: 'Header',
+
+  computed: {
+    ...mapGetters('auth', ['user'])
+  },
+
+  methods: {
+    async logout() {
+      await this.$store.dispatch('auth/logout')
+      this.$router.push({ name: 'login' })
+    }
+  }
 }
 </script>
 
 <template>
-  <div class="header py-4">
+  <div
+    v-if="user"
+    class="header py-4"
+  >
     <div class="container">
       <div class="d-flex">
         <RouterLink
           class="header-brand"
-          :to="{ name: 'home' }"
+          :to="{ name: 'dashboard' }"
         >
           <img
             src="~@assets/img/logo.svg"
@@ -25,14 +41,15 @@ export default {
               class="nav-link pr-0 leading-none"
               data-toggle="dropdown"
             >
-              <span
+              <img
+                :src="user.avatar"
+                alt="avatar"
                 class="avatar"
-                style="background-image: url(./demo/faces/female/25.jpg)"
-              />
+              >
               <span class="ml-2 d-none d-lg-block">
-                <span class="text-default">Jane Pearson</span>
+                <span class="text-default">{{ user.name }}</span>
                 <small class="text-muted d-block mt-1">
-                  Administrator
+                  {{ user.role.name }}
                 </small>
               </span>
             </a>
@@ -40,6 +57,7 @@ export default {
               <a
                 class="dropdown-item"
                 href="#"
+                @click.prevent="logout"
               >
                 <i class="dropdown-icon fe fe-log-out" /> Log out
               </a>

@@ -1,5 +1,11 @@
+<script>
+export default {
+  middleware: 'auth'
+}
+</script>
+
 <template>
   <div class="container">
-    home
+    dashboard
   </div>
 </template>

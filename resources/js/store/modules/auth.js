@@ -58,8 +58,23 @@ export const actions = {
       axios
         .post('/login', payload)
         .then(({ data }) => {
+          const { data: user } = data
           commit('setLoggedIn', 'true')
-          commit('setUser', data)
+          commit('setUser', user)
+          resolve(data)
+        })
+        .catch(({ response }) => reject(response))
+    })
+  },
+
+  register({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/register', payload)
+        .then(({ data }) => {
+          const { data: user } = data
+          commit('setLoggedIn', 'true')
+          commit('setUser', user)
           resolve(data)
         })
         .catch(({ response }) => reject(response))
